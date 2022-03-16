@@ -13,6 +13,54 @@ router.get("/", async (req, res, next) => {
       console.log(error);
     }
   });
+
+  router.get("/orderDESC", async (req, res, next) => {
+    try {
+      const data = await Product.findAll({
+        include: Review,
+      });
+      res.send(data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  router.get("/orderASC", async (req, res, next) => {
+    try {
+      const data = await Product.findAll({
+        include: Review,
+      });
+      res.send(data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+//       include: User,
+//       where: {
+//         [Op.or]: [
+//           {
+//             category: {
+//               [Op.in]: req.query.category.split(","),
+//             },
+//           },
+//           req.query.title && {
+//             title: {
+//               [Op.iLike]: `%${req.query.title}%`,
+//             },
+//           },
+//           req.query.content && {
+//             content: {
+//               [Op.iLike]: `%${req.query.content}%`,
+//             },
+//           },
+//         ],
+//       },
+//     });
+//     res.send(data);
+
+/*   Implement search on products by  name, description
+Implement filters by price range
+order products in asc/desc order */
   
   router.get("/:id", async (req, res, next) => {
     try {
