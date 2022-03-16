@@ -14,10 +14,11 @@ router.get("/", async (req, res, next) => {
     }
   });
 
-  router.get("/orderDESC", async (req, res, next) => {
+  router.get("/priceDESC", async (req, res, next) => {
     try {
       const data = await Product.findAll({
         include: Review,
+        order: [['price', 'DESC']]
       });
       res.send(data);
     } catch (error) {
@@ -25,10 +26,11 @@ router.get("/", async (req, res, next) => {
     }
   });
 
-  router.get("/orderASC", async (req, res, next) => {
+  router.get("/priceASC", async (req, res, next) => {
     try {
       const data = await Product.findAll({
         include: Review,
+        order: ['price']
       });
       res.send(data);
     } catch (error) {
@@ -59,8 +61,7 @@ router.get("/", async (req, res, next) => {
 //     res.send(data);
 
 /*   Implement search on products by  name, description
-Implement filters by price range
-order products in asc/desc order */
+Implement filters by price range*/
   
   router.get("/:id", async (req, res, next) => {
     try {
