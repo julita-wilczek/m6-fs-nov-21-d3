@@ -23,7 +23,7 @@ const Product = sequelize.define(
         }, 
         image: {
             type: DataTypes.STRING, //url
-            allowNull: false,
+            defaultValue: "https://picsum.photos/200/300"
         }, 
         price: {
             type: DataTypes.FLOAT,

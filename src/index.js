@@ -2,6 +2,8 @@ import express from "express"
 import cors from "cors"
 import * as models from "./db/models/index.js"
 import { testDB, syncDB } from "./db/index.js"
+import productsRouter from "./services/product/index.js"
+import reviewsRouter from "./services/review/index.js"
 
 const server = express()
 
@@ -9,6 +11,9 @@ server.use(express.json())
 server.use(cors())
 
 const {PORT} = process.env
+
+server.use("/products", productsRouter)
+server.use("/reviews", reviewsRouter)
 
 const initialize = () => {
     try {
