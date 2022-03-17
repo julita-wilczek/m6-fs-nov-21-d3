@@ -13,16 +13,12 @@ const Product = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,   
         }, 
-        category: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        }, 
         description: {
             type: DataTypes.TEXT,
             allowNull: false,
         }, 
         image: {
-            type: DataTypes.STRING, //url
+            type: DataTypes.STRING, //ur
             defaultValue: "https://picsum.photos/200/300"
         }, 
         price: {

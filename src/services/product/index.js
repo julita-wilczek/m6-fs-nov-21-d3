@@ -37,6 +37,10 @@ router.get("/", async (req, res, next) => {
       console.log(error);
     }
   });
+
+/*   Implement search on products by  name, description
+Implement filters by price range*/
+
 //       include: User,
 //       where: {
 //         [Op.or]: [
@@ -60,8 +64,7 @@ router.get("/", async (req, res, next) => {
 //     });
 //     res.send(data);
 
-/*   Implement search on products by  name, description
-Implement filters by price range*/
+
   
   router.get("/:id", async (req, res, next) => {
     try {
