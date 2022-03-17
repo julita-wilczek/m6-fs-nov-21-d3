@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { Product, Review, User} from "../../db/models/index.js";
+import { User, Review } from "../../db/models/index.js";
 
 const router = Router()
 
 router.get("/", async (req, res, next) => {
     try {
-      const data = await Review.findAll({
-        include: [Product, User]
+      const data = await User.findAll({
+        include: Review,
         });
       res.send(data);
     } catch (error) {
@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
   
   router.get("/:id", async (req, res, next) => {
     try {
-      const data = await Review.findByPk(req.params.id, {include: [Review, User]});
+      const data = await User.findByPk(req.params.id, {include: Review});
       res.send(data);
     } catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ router.get("/", async (req, res, next) => {
   
   router.post("/", async (req, res, next) => {
     try {
-      const newReview = await Review.create(req.body);
+      const newReview = await User.create(req.body);
       res.send(newReview);
     } catch (error) {
       console.log(error);
@@ -34,7 +34,7 @@ router.get("/", async (req, res, next) => {
   
   router.put("/:id", async (req, res, next) => {
     try {
-      const result = await Review.update(req.body, {
+      const result = await User.update(req.body, {
         where: {
           id: req.params.id,
         },
@@ -48,7 +48,7 @@ router.get("/", async (req, res, next) => {
   
   router.delete("/:id", async (req, res, next) => {
     try {
-      const rows = await Review.destroy({ where: { id: req.params.id } });
+      const rows = await User.destroy({ where: { id: req.params.id } });
       res.send({ rows });
     } catch (error) {
       console.log(error);

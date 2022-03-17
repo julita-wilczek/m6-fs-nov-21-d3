@@ -14,7 +14,7 @@ export const testDB = async() => {
 
 export const syncDB = async() => {
     try{
-        await sequelize.sync({logging: false}) // Here you can give different options. Logging: false is for data to be printed in the terminal. Set to false, since it's too much info
+        await sequelize.sync({logging: false, alter: true}) // Here you can give different options. Logging: false is for data to be printed in the terminal. Set to false, since it's too much info
     } catch(error) {
         console.log(error)
     }

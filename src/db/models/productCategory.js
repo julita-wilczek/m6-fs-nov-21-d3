@@ -10,4 +10,3 @@ const productCategory = sequelize.define(
 );
 
 export default productCategory;
-

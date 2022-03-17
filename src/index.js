@@ -4,6 +4,8 @@ import * as models from "./db/models/index.js"
 import { testDB, syncDB } from "./db/index.js"
 import productsRouter from "./services/product/index.js"
 import reviewsRouter from "./services/review/index.js"
+import usersRouter from "./services/users/index.js"
+import categoriesRouter from "./services/category/index.js"
 
 const server = express()
 
@@ -14,6 +16,9 @@ const {PORT} = process.env
 
 server.use("/products", productsRouter)
 server.use("/reviews", reviewsRouter)
+server.use("/users", usersRouter)
+server.use("/categories", categoriesRouter)
+
 
 const initialize = () => {
     try {
