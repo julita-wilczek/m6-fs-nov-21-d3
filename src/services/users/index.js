@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { User, Review } from "../../db/models/index.js";
+import { col, fn } from "sequelize";
 
 const router = Router()
 
@@ -11,8 +12,20 @@ router.get("/", async (req, res, next) => {
       res.send(data);
     } catch (error) {
       console.log(error);
+      next(error)
     }
   });
+  
+   // /users/stats - get total number of reviews for each user (hint: aggregate on reviews)
+   router.get("/stats", async (req, res, next) => {
+    try{
+      const reviewPerUser = await Review.findAll({attributes: ["userId", [fn("COUNT", col("id")), "total"]], group: "userId" });
+      res.send({reviewPerUser})
+    } catch(error) {
+      console.log(error)
+      next(error)
+    }
+  })
   
   router.get("/:id", async (req, res, next) => {
     try {
@@ -20,8 +33,21 @@ router.get("/", async (req, res, next) => {
       res.send(data);
     } catch (error) {
       console.log(error);
+      next(error)
     }
   });
+ 
+
+  // router.get("/stats", async (req, res, next) => {
+  //   try {
+  //     const totalByCountry = await User.findAll({
+  //       attributes: ["country", [fn("COUNT", col("id")), "total"]],
+  //       group: "country",
+  //     });
+  
+  
+
+
   
   router.post("/", async (req, res, next) => {
     try {
@@ -29,6 +55,7 @@ router.get("/", async (req, res, next) => {
       res.send(newReview);
     } catch (error) {
       console.log(error);
+      next(error)
     }
   });
   
@@ -43,6 +70,7 @@ router.get("/", async (req, res, next) => {
       res.send(result[1][0]);
     } catch (error) {
       console.log(error);
+      next(error)
     }
   });
   
@@ -52,6 +80,7 @@ router.get("/", async (req, res, next) => {
       res.send({ rows });
     } catch (error) {
       console.log(error);
+      next(error)
     }
   });
   
