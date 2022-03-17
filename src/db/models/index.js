@@ -11,6 +11,6 @@ Review.belongsTo(User, {onDelete: "CASCADE"})
 User.hasMany(Review, {onDelete: "CASCADE"})
 
 Category.belongsToMany(Product, {through: productCategory})
-Product.belongsToMany(Category, {through: productCategory} )
+Product.belongsToMany(Category, {through: productCategory})
 
 export {Review, Product, Category, User, productCategory};

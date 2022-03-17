@@ -6,7 +6,7 @@ const router = Router()
 router.get("/", async (req, res, next) => {
     try {
       const data = await Product.findAll({
-        include: [{model: Category, through: productCategory}, {model: Review, include: User}]
+        include: [{model: Category, through: {attributes: []}}, {model: Review, attributes:["id", "text"], include: [{model: User, attributes: ["id", "firstName", "lastName", "email"]}]}]
       });
       res.send(data);
     } catch (error) {
@@ -77,12 +77,25 @@ Implement filters by price range*/
   
   router.post("/", async (req, res, next) => {
     try {
-      const newProduct = await Product.create(req.body);
-      res.send(newProduct);
+      const {categoryId, ...rest} = req.body;
+      const newProduct = await Product.create(rest);
+      const productCat = await productCategory.create({
+        productId: newProduct.id,
+        categoryId: categoryId,
+      })
+      res.send({newProduct, productCat});
     } catch (error) {
       console.log(error);
     }
   });
+
+
+  
+  //     res.send({ newArticle, articleCategory });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // });
   
   router.put("/:id", async (req, res, next) => {
     try {
