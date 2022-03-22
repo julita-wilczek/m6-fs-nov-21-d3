@@ -40,6 +40,17 @@ router.get("/", async (req, res, next) => {
     }
   });
 
+
+    // // /users/stats - get total number of reviews for each user (hint: aggregate on reviews)
+    // router.get("/stats", async (req, res, next) => {
+    //     try{
+    //       const reviewPerUser = await Review.findAll({attributes: ["userId", [fn("COUNT", col("id")), "total"]], group: "userId" });
+    //       res.send({reviewPerUser})
+    //     } catch(error) {
+    //       console.log(error)
+    //       next(error)
+    //     }
+    //   })
   // CART would need to be created somehow on log-in or sth
   // It doesn't have anything passed in create as parameters because 
   // all the products are added using PUT method
